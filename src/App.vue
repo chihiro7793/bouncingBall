@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <h3>Bounce the Ball!</h3>
+  <transition
+    name="ballmove"
+    enter-active-class="bouncein"
+    leave-active-class="rollout" 
+   >
+  <div v-if="show">
+    <bouncing-ball class="child"></bouncing-ball>
+  </div>
+  </transition>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BouncingBall from './components/BouncingBall.vue';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+   components: {
+    BouncingBall,
+  },
+  data() {
+    return {
+      show: false 
+    }
+  },
+  mounted(){
+      this.show = true;
+    
+      setTimeout(()=>{
+        this.show= false;
+      },3000)
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
